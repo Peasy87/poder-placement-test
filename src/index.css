@@ -1,0 +1,11 @@
+/* Minimal base styles — the test component brings its own design system */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+* {
+  -webkit-tap-highlight-color: transparent;
+}
