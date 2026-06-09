@@ -9,7 +9,7 @@ import React, { useState, useEffect, useRef } from 'react';
 //   2. Deploy to Vercel as a Next.js page or single-page React app
 // ============================================================
 
-const WEBHOOK_URL = "https://YOUR-N8N-INSTANCE.com/webhook/poder-placement-test";
+const WEBHOOK_URL = "https://palston.app.n8n.cloud/webhook-test/poder-placement-test";
 
 // PODER brand colors (extracted from poderworks.org iconography)
 const BRAND = {
