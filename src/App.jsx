@@ -512,7 +512,7 @@ function TestBlock({ T, lang, block, blockIdx, answers, onAnswer, onPrev, onNext
   return (
     <div className="poder-test-shell">
       {hasContext && (
-        <div className="poder-context-sticky">
+        <div className={"poder-context-box" + (block.contextType === "image" ? " poder-context-box--sticky" : "")}>
           <div className="poder-context-prompt">{promptText}</div>
           <ContextRenderer block={block} />
         </div>
@@ -586,30 +586,22 @@ function ContextRenderer({ block }) {
   }
   if (block.contextType === "catalog") {
     return (
-      <div className="poder-catalog">
-        <h4>COURSE CATALOG</h4>
-        <div className="poder-catalog-grid">
-          <div>
-            <strong>General Equivalency Diploma (GED)</strong>
-            <p>Do you want to get your GED? Then you need to practice your reading, writing, and math skills. Classes are in English or Spanish. No fee.</p>
-            <p><em>Instructor: Mr. Chen (English) / Ms. Lopez (Spanish)<br/>Days/Times: Mon, Wed 6:00 p.m. – 8:00 p.m.</em></p>
-          </div>
-          <div>
-            <strong>Introduction to Computers</strong>
-            <p>This class is for adults who want to learn about computers and the Internet. You will learn about keyboarding, e-mail, and computer jobs. Fee: $75</p>
-            <p><em>Instructor: Mrs. Gates<br/>Days/Times: Mon, Wed 7:00 p.m. – 9:00 p.m.</em></p>
-          </div>
-          <div>
-            <strong>TV and DVD Repair</strong>
-            <p>This class will teach you how to repair TVs and DVD players. You will also learn about opening your own repair shop. Fee: $85</p>
-            <p><em>Instructor: Mr. Stern<br/>Days/Times: Mon, Tues 6:00 p.m. – 8:00 p.m.</em></p>
-          </div>
-          <div>
-            <strong>Citizenship</strong>
-            <p>Do you want to be an American citizen? First, you need to learn about American history and civics. This class will prepare you for the U.S. citizenship test. Requirements: Legal resident. No fee.</p>
-            <p><em>Instructor: Ms. Cuevas<br/>Days/Times: Thurs 7:00 p.m. – 9:00 p.m.</em></p>
-          </div>
-        </div>
+      <div className="poder-story">
+        <p><strong>General Equivalency Diploma (GED)</strong></p>
+        <p>Do you want to get your GED? Then you need to practice your reading, writing, and math skills. Classes are in English or Spanish. No fee.</p>
+        <p><em>Instructor: Mr. Chen (English) / Ms. Lopez (Spanish). Days/Times: Mon, Wed 6:00 p.m. – 8:00 p.m.</em></p>
+
+        <p><strong>Introduction to Computers</strong></p>
+        <p>This class is for adults who want to learn about computers and the Internet. You will learn about keyboarding, e-mail, and computer jobs. Fee: $75.</p>
+        <p><em>Instructor: Mrs. Gates. Days/Times: Mon, Wed 7:00 p.m. – 9:00 p.m.</em></p>
+
+        <p><strong>TV and DVD Repair</strong></p>
+        <p>This class will teach you how to repair TVs and DVD players. You will also learn about opening your own repair shop. Fee: $85.</p>
+        <p><em>Instructor: Mr. Stern. Days/Times: Mon, Tues 6:00 p.m. – 8:00 p.m.</em></p>
+
+        <p><strong>Citizenship</strong></p>
+        <p>Do you want to be an American citizen? First, you need to learn about American history and civics. This class will prepare you for the U.S. citizenship test. Requirements: Legal resident. No fee.</p>
+        <p><em>Instructor: Ms. Cuevas. Days/Times: Thurs 7:00 p.m. – 9:00 p.m.</em></p>
       </div>
     );
   }
@@ -998,16 +990,21 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   padding: 16px 0 0;
   display: flex; flex-direction: column;
 }
-.poder-context-sticky {
-  position: sticky;
-  top: 78px;
-  z-index: 10;
+.poder-context-box {
   background: ${BRAND.paper};
   border: 2px solid ${BRAND.ink};
   border-radius: 14px;
   padding: 12px;
   margin-bottom: 18px;
   box-shadow: 0 4px 14px rgba(0,0,0,.06);
+}
+.poder-context-box--sticky {
+  position: sticky;
+  top: 78px;
+  z-index: 10;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .poder-context-prompt {
   font-family: 'Archivo', sans-serif;
@@ -1070,33 +1067,6 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   font-family: 'Archivo', sans-serif; font-weight: 700;
 }
 
-.poder-catalog {
-  background: white;
-  border: 2px solid ${BRAND.ink};
-  border-radius: 8px;
-  padding: 12px;
-  font-size: 13px;
-}
-.poder-catalog h4 {
-  font-family: 'Archivo', sans-serif;
-  font-weight: 900;
-  font-size: 16px;
-  letter-spacing: 0.1em;
-  margin: 0 0 10px;
-  text-align: center;
-  border-bottom: 2px double ${BRAND.ink};
-  padding-bottom: 6px;
-}
-.poder-catalog-grid {
-  display: grid; gap: 12px;
-}
-@media (min-width: 520px) {
-  .poder-catalog-grid { grid-template-columns: 1fr 1fr; }
-}
-.poder-catalog-grid strong { display: block; margin-bottom: 4px; }
-.poder-catalog-grid p { margin: 4px 0; }
-.poder-catalog-grid em { color: #555; font-style: normal; font-size: 12px; }
-
 .poder-story {
   background: white;
   border: 2px solid ${BRAND.ink};
@@ -1104,9 +1074,6 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   padding: 12px 14px;
   font-size: 15px;
   line-height: 1.5;
-  max-height: 280px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 .poder-story p { margin: 0 0 10px; }
 .poder-story p:last-child { margin-bottom: 0; }
