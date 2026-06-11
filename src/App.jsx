@@ -1074,6 +1074,11 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   padding: 12px 14px;
   font-size: 15px;
   line-height: 1.5;
+  max-height: min(280px, 40vh);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  /* subtle hint that there's more to scroll */
+  background-image: linear-gradient(to bottom, white 70%, rgba(0,0,0,0.05));
 }
 .poder-story p { margin: 0 0 10px; }
 .poder-story p:last-child { margin-bottom: 0; }
