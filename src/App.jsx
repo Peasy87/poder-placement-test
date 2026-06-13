@@ -77,6 +77,8 @@ const t = {
   // Submit
   submit:          { en: "Submit", es: "Enviar" },
   submitting:      { en: "Submitting…", es: "Enviando…" },
+  // "I don't know" skip option
+  idk:             { en: "I don't know", es: "No sé" },
   // Done — celebration + Remind
   celebrationTitle:{ en: "Congratulations, you are one step closer to your goal!", es: "¡Felicidades, estás un paso más cerca de tu meta!" },
   nextSteps:       { en: "Next Steps", es: "Próximos pasos" },
@@ -638,6 +640,16 @@ function QuestionCard({ qNum, q, selected, onAnswer, T }) {
             <span className="poder-choice-text">{q.choices[letter]}</span>
           </button>
         ))}
+        {/* "I don't know / No sé" — bilingual skip option, visually distinct from real answers */}
+        <button
+          type="button"
+          className={"poder-choice poder-choice--idk" + (selected === "idk" ? " selected" : "")}
+          onClick={() => onAnswer("idk")}
+          aria-pressed={selected === "idk"}
+        >
+          <span className="poder-choice-letter poder-choice-letter--idk">?</span>
+          <span className="poder-choice-text">{T("idk")}</span>
+        </button>
       </div>
     </div>
   );
@@ -1154,6 +1166,41 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 .poder-choice-text {
   font-size: 15px;
   line-height: 1.35;
+}
+
+/* "I don't know / No sé" skip option — visually distinct from real answers */
+.poder-choice--idk {
+  margin-top: 6px;
+  border-style: dashed;
+  border-color: #b0b0a8;
+  font-style: italic;
+  background: transparent;
+}
+.poder-choice--idk .poder-choice-text {
+  color: #555;
+  font-size: 14px;
+}
+.poder-choice--idk:hover {
+  border-color: ${BRAND.ink};
+}
+.poder-choice--idk.selected {
+  border-style: solid;
+  border-color: ${BRAND.yellow};
+  background: ${BRAND.yellow}25;
+}
+.poder-choice--idk.selected .poder-choice-text {
+  color: ${BRAND.ink};
+  font-style: normal;
+}
+.poder-choice-letter--idk {
+  border-style: dashed !important;
+  color: #888;
+}
+.poder-choice--idk.selected .poder-choice-letter--idk {
+  background: ${BRAND.yellow};
+  border-color: ${BRAND.yellow} !important;
+  border-style: solid !important;
+  color: ${BRAND.ink};
 }
 
 /* ===== Done screen — celebration + Remind ===== */
