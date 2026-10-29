@@ -9,7 +9,7 @@ import React, { useState, useEffect, useRef } from 'react';
 //   2. Deploy to Vercel as a Next.js page or single-page React app
 // ============================================================
 
-const WEBHOOK_URL = "https://palston.app.n8n.cloud/webhook-test/poder-placement-test";
+const WEBHOOK_URL = "https://poderworks.app.n8n.cloud/webhook/poder-placement-test";
 
 // PODER brand colors (extracted from poderworks.org iconography)
 const BRAND = {
@@ -660,8 +660,8 @@ function QuestionCard({ qNum, q, selected, onAnswer, T }) {
 // ============================================================
 function DoneScreen({ T, lang, info }) {
   // sms: deep link — on mobile this opens the SMS composer pre-filled with the code
-  const smsHref = "sms:81010?&body=%40prefall26"; // %40 = @
-  const smsHrefIos = "sms:81010;?&body=%40prefall26"; // iOS uses ;? separator
+  const smsHref = "sms:81010?&body=%40inspring27"; // %40 = @
+  const smsHrefIos = "sms:81010;?&body=%40inspring27"; // iOS uses ;? separator
 
   return (
     <div className="poder-done-screen">
@@ -704,7 +704,7 @@ function DoneScreen({ T, lang, info }) {
           <li>
             <p className="poder-remind-label">{T("smsInstruction")}</p>
             <a href={smsHref} className="poder-remind-pill poder-remind-pill--code">
-              @prefall26
+              @inspring27
             </a>
           </li>
           <li>
